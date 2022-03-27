@@ -1,0 +1,1 @@
+export const GET_ALL_PATIENT="GET_ALL_PATIENT";
