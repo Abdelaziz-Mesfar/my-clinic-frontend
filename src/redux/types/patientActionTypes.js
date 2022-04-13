@@ -1,1 +1,1 @@
-export const GET_ALL_PATIENT="GET_ALL_PATIENT";
+export const SET_ALL_PATIENTS="SET_ALL_PATIENTS";
