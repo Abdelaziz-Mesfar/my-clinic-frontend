@@ -2,7 +2,7 @@ import { LOGIN, LOGOUT } from "../types/userTypes"
 
 const initialState = {
     isAuth: false,
-    user: null,
+    info: null,
     token: null
 }
 
@@ -12,7 +12,7 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isAuth: true,
-                user: action.payload.user,
+                info: action.payload.user,
                 token: action.payload.token
             }
         case LOGOUT:
