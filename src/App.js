@@ -1,3 +1,4 @@
+import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import GlobalLoading from './components/global loading/GlobalLoading';
@@ -6,8 +7,15 @@ import Login from './pages/Login';
 import Patients from './pages/Patients';
 import Profile from './pages/Profile';
 import Registre from './pages/Registre';
+import { login } from './redux/actions/userActionCreators';
 
 function App() {
+  const dispatch = useDispatch()
+  const token = localStorage.getItem('token')
+  const user = localStorage.getItem('user')
+  if (token && user) {
+    dispatch(login(JSON.parse(user), token))
+  }
   return (
     <>
       <GlobalLoading />
