@@ -17,7 +17,7 @@ export const fetchAllPatients = () => {
             const patients = res.data
             dispatch(setAllPatients(patients))
         } catch (error) {
-            dispatch(requestFailed(error.message))
+            dispatch(requestFailed(error))
         }
     }
 }
