@@ -26,7 +26,7 @@ function App() {
           {/* <Route exact path='/' component={Home} /> */}
           <PublicRoute exact path='/' component={Home} />
           {/* <Route exact path='/login' component={Login} /> */}
-          <PublicRoute exact path='/login' />
+          <PublicRoute exact path='/login' component={Login} />
           {/* <Route exact path='/register' component={Registre} /> */}
           <PublicRoute exact path='/register' component={Registre} />
           <Route exact path='/dashboard' component={Dashboard} />
