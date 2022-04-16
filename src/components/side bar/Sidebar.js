@@ -10,7 +10,7 @@ import {
 
 const Sidebar = () => {
     return (
-        <CDBSidebar textColor="#333" backgroundColor="#f0f0f0">
+        <CDBSidebar style={{ height: "100vh", position: "sticky", top: 0 }} textColor="#333" backgroundColor="#f0f0f0">
             <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>
                 Contrast Light Mode
             </CDBSidebarHeader>
