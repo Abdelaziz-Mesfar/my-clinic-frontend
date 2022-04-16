@@ -9,6 +9,7 @@ import Patients from './pages/Patients';
 import Profile from './pages/Profile';
 import Registre from './pages/Registre';
 import { login } from './redux/actions/userActionCreators';
+import PrivateRoute from './routes/PrivateRoute';
 import PublicRoute from './routes/PublicRoute';
 
 function App() {
@@ -29,9 +30,12 @@ function App() {
           <PublicRoute exact path='/login' component={Login} />
           {/* <Route exact path='/register' component={Registre} /> */}
           <PublicRoute exact path='/register' component={Registre} />
-          <Route exact path='/dashboard' component={Dashboard} />
-          <Route exact path='/patients' component={Patients} />
-          <Route exact path='/profile' component={Profile} />
+          {/* <Route exact path='/dashboard' component={Dashboard} /> */}
+          <PrivateRoute exact path='/dashboard' component={Dashboard} />
+          {/* <Route exact path='/patients' component={Patients} /> */}
+          <PrivateRoute exact path='/patients' component={Patients} />
+          {/* <Route exact path='/profile' component={Profile} /> */}
+          <PrivateRoute exact path='/profile' component={Profile} />
         </Switch>
       </Router>
     </>
