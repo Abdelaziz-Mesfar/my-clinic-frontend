@@ -7,6 +7,9 @@ import {
     CDBSidebarMenuItem,
     CDBSidebarFooter,
 } from 'cdbreact';
+import { NavLink } from 'react-router-dom';
+
+import './sidebar.css'
 
 const Sidebar = () => {
     return (
@@ -16,14 +19,20 @@ const Sidebar = () => {
             </CDBSidebarHeader>
             <CDBSidebarContent>
                 <CDBSidebarMenu>
-                    <CDBSidebarMenuItem icon="th-large">Dashboard</CDBSidebarMenuItem>
-                    <CDBSidebarMenuItem icon="bi bi-people-fill">Patients</CDBSidebarMenuItem>
-                    <CDBSidebarMenuItem icon="bi bi-person-circle" iconType="solid">Profile</CDBSidebarMenuItem>
+                    <NavLink to="/dashboard">
+                        <CDBSidebarMenuItem icon="th-large">Dashboard</CDBSidebarMenuItem>
+                    </NavLink>
+                    <NavLink to="/patients">
+                        <CDBSidebarMenuItem icon="bi bi-people-fill">Patients</CDBSidebarMenuItem>
+                    </NavLink>
+                    <NavLink to="/profile">
+                        <CDBSidebarMenuItem icon="bi bi-person-circle" iconType="solid">Profile</CDBSidebarMenuItem>
+                    </NavLink>
                 </CDBSidebarMenu>
             </CDBSidebarContent>
 
             <CDBSidebarFooter style={{ textAlign: 'center' }}>
-               <CDBSidebarMenuItem icon="bi bi-door-open-fill" className="text-center" >Log Out</CDBSidebarMenuItem>
+                <CDBSidebarMenuItem icon="bi bi-door-open-fill" className="text-center" >Log Out</CDBSidebarMenuItem>
             </CDBSidebarFooter>
         </CDBSidebar>
     );
