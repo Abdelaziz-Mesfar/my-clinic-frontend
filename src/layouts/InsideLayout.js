@@ -1,12 +1,14 @@
 import React from 'react'
 
+import Sidebar from '../components/side bar/Sidebar';
+
 function InsideLayout(props) {
-    console.log(props);
     return (
         <div style={{ display: "flex" }}>
-            <div style={{ background: 'lightgreen', padding: 15, height: '100vh' }}>
+            {/* <div style={{ background: 'lightgreen', padding: 15, height: '100vh' }}>
                 <p>InsideLayout</p>
-            </div>
+            </div> */}
+            <Sidebar />
             <div>
                 {props.children}
             </div>
