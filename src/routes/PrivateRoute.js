@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { Route } from 'react-router-dom'
+import InsideLayout from '../layouts/InsideLayout'
 
 function PrivateRoute(props) {
     const { component: Component } = props
@@ -12,7 +13,7 @@ function PrivateRoute(props) {
             component={() => (
                 <>
                     {
-                        isAuth ? (<Component />) : (<Redirect to='login' />)
+                        isAuth ? (<InsideLayout> <Component /> </InsideLayout>) : (<Redirect to='login' />)
                     }
                 </>
             )}
