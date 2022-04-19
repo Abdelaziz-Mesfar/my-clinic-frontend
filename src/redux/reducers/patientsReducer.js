@@ -1,4 +1,4 @@
-import { SET_ALL_PATIENTS } from "../types/patientActionTypes";
+import { ADD_PATIENT, SET_ALL_PATIENTS } from "../types/patientActionTypes";
 
 const initialState = {
   all: [],
@@ -12,6 +12,11 @@ function patientsReducer(state = initialState, action) {
         ...state,
         all: action.payload
       }
+    case ADD_PATIENT: 
+      return {
+        ...state,
+        all: [...state.all, action.payload]
+      }  
     default:
       return state;
   }

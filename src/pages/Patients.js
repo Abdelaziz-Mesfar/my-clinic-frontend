@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 import { fetchAllPatients, setAllPatients } from '../redux/actions/patientsActionCreator'
 
 function Patients() {
@@ -20,7 +21,9 @@ function Patients() {
   }, [])
   return (
     <>
-      <div>Patients</div>
+      <NavLink to='/new-patient'>
+        <button> Add new patient </button>
+      </NavLink>
       {
         patients.map(patient => (
           <div className="card m-4 p-4" key={patient._id}>

@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import GlobalLoading from './components/global loading/GlobalLoading';
+import CreateNewPatient from './pages/CreateNewPatient';
 import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -24,17 +25,12 @@ function App() {
       <GlobalLoading />
       <Router>
         <Switch>
-          {/* <Route exact path='/' component={Home} /> */}
           <PublicRoute exact path='/' component={Home} />
-          {/* <Route exact path='/login' component={Login} /> */}
           <PublicRoute exact path='/login' component={Login} />
-          {/* <Route exact path='/register' component={Registre} /> */}
           <PublicRoute exact path='/register' component={Register} />
-          {/* <Route exact path='/dashboard' component={Dashboard} /> */}
           <PrivateRoute exact path='/dashboard' component={Dashboard} />
-          {/* <Route exact path='/patients' component={Patients} /> */}
           <PrivateRoute exact path='/patients' component={Patients} />
-          {/* <Route exact path='/profile' component={Profile} /> */}
+          <PrivateRoute exact path='/new-patient' component={CreateNewPatient} />
           <PrivateRoute exact path='/profile' component={Profile} />
         </Switch>
       </Router>
