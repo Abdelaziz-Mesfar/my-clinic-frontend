@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Patients from './pages/Patients';
 import Profile from './pages/Profile';
-import Registre from './pages/Registre';
+import Register from './pages/Register';
 import { login } from './redux/actions/userActionCreators';
 import PrivateRoute from './routes/PrivateRoute';
 import PublicRoute from './routes/PublicRoute';
@@ -29,7 +29,7 @@ function App() {
           {/* <Route exact path='/login' component={Login} /> */}
           <PublicRoute exact path='/login' component={Login} />
           {/* <Route exact path='/register' component={Registre} /> */}
-          <PublicRoute exact path='/register' component={Registre} />
+          <PublicRoute exact path='/register' component={Register} />
           {/* <Route exact path='/dashboard' component={Dashboard} /> */}
           <PrivateRoute exact path='/dashboard' component={Dashboard} />
           {/* <Route exact path='/patients' component={Patients} /> */}

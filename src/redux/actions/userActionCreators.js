@@ -28,3 +28,20 @@ export const requestLogin = (email, password) => {
         }
     }
 }
+
+export const requestRegister = ({firstName, lastName, email, password}, history) => {
+    return async(dispatch) => {
+        try {
+            dispatch(requestStarted())
+            const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, { firstName, lastName, email, password })
+            dispatch(requestSucceeded())
+            // console.log({res});
+            if(res.data.message)(
+                alertSuccess(res.data.message)
+            )
+            history.push('/login')
+        } catch (error) {
+            dispatch(requestFailed(error))
+        }
+    }
+}
