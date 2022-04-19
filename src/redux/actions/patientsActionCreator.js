@@ -9,10 +9,12 @@ export const setAllPatients = (patientsArray) => ({
 })
 
 export const fetchAllPatients = () => {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
+        const state = getState()
+        const token = state.user.token
         try {
             dispatch(requestStarted())
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/patients`)
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/patients`, {headers: {authorization: token}})
             dispatch(requestSucceeded())
             const patients = res.data
             dispatch(setAllPatients(patients))
