@@ -6,6 +6,7 @@ import CreateNewPatient from './pages/CreateNewPatient';
 import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import PatientDetails from './pages/PatientDetails';
 import Patients from './pages/Patients';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
@@ -31,6 +32,7 @@ function App() {
           <PrivateRoute exact path='/dashboard' component={Dashboard} />
           <PrivateRoute exact path='/patients' component={Patients} />
           <PrivateRoute exact path='/new-patient' component={CreateNewPatient} />
+          <PrivateRoute exact path='/patients/:id' component={PatientDetails} />
           <PrivateRoute exact path='/profile' component={Profile} />
         </Switch>
       </Router>
