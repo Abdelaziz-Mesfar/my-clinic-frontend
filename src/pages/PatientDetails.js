@@ -1,8 +1,11 @@
 import React from 'react'
+import PatientTeethChart from '../components/patient teeth chart/PatientTeethChart'
 
 function PatientDetails() {
   return (
-    <div>PatientDetails</div>
+    <div>
+      <PatientTeethChart />
+    </div>
   )
 }
 

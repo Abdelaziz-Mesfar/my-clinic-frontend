@@ -1,0 +1,50 @@
+body{
+    background: white
+  }
+  
+  .tooth-chart{
+    width:450px;
+  }
+
+  .tooth-chart svg {
+      enable-background: new 0 0 450 700;
+  }
+
+  #toothLabels text {
+      font-family: sans-serif;
+      font-size: 21px;
+  }
+  
+  /* #Spots{
+    polygon, path{
+      -webkit-transition:fill .25s;
+      transition:fill .25s;
+    } 
+    polygon:hover, polygon:active, path:hover, path:active{
+      fill:#dddddd !important;
+    }
+} */
+
+#Spots polygon path {
+    -webkit-transition:fill .25s;
+    transition:fill .25s;
+}
+#Spots path {
+    -webkit-transition:fill .25s;
+    transition:fill .25s;
+}
+
+#Spots polygon:hover {
+    fill: #ddd !important;
+}
+
+#Spots polygon:active {
+    fill: #ddd !important;
+
+}
+#Spots path:hover {
+    fill: #ddd !important;
+}
+#Spots path:active {
+    fill: #ddd !important;
+}
