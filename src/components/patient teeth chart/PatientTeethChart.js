@@ -1,16 +1,19 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button'
-import Modal from 'react-bootstrap/Modal'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import DeleteToothDescriptionModal from '../delete-Tooth-Description-Modal/DeleteToothDescriptionModal';
+import { useHistory } from 'react-router-dom';
+
+import './patientTeethChart.css';
+
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button'
+import Modal from 'react-bootstrap/Modal';
+import  Form  from 'react-bootstrap/Form';
+
 import { fetchToothDescriptions, requestCreatingNewDescription } from '../../redux/actions/patientTeethDescriptionActionCreators';
 
 
-import './patientTeethChart.css'
-import { Form } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
 
 const spots = [
 	{
@@ -646,12 +649,12 @@ function PatientTeethChart() {
 						<text id="lbl1" transform="matrix(1 0 0 1 93.9767 324.769)"  >1</text>
 					</g>
 					<g id="Spots">
-						{spots.map(t => (t.nature === "polygon" ? (<polygon onClick={handleShow} id={t.number} fill="#FFFFFF" data-key={t.number} points={t.points} />) : (<path onClick={handleShow} id={t.number} fill="#FFFFFF" data-key={t.number} d={t.d} />)))}
+						{spots.map(t => (t.nature === "polygon" ? (<polygon key={t.number} onClick={handleShow} id={t.number} fill="#FFFFFF" data-key={t.number} points={t.points} />) : (<path key={t.number} onClick={handleShow} id={t.number} fill="#FFFFFF" data-key={t.number} d={t.d} />)))}
 					</g>
 					<g id="adult-outlines">
 						<g id="XMLID_210_">
 							{
-								outlines.map(out => (<path id={out.id} fill="#010101" d={out.d} />))
+								outlines.map(out => (<path key={out.id} id={out.id} fill="#010101" d={out.d} />))
 							}
 						</g>
 					</g>
@@ -683,7 +686,10 @@ function PatientTeethChart() {
 									toothDescription.map(desc => (
 										<tr>
 											<td>Description</td>
-											<td> {desc.description} </td>
+											<td className="d-flex justify-content-between align-items-center">
+												{desc.description}
+												<DeleteToothDescriptionModal description={desc} toothId={toothId} patientId={patientId} />
+											</td>
 										</tr>
 									))
 								}

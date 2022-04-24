@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { alertSuccess } from "../../utils/feedback";
-import { ADD_TOOTH_DESCRIPTION, SET_PATIENT_TOOTH_DESCRIPTION } from "../types/patientTeethDescriptionTypes";
+import { ADD_TOOTH_DESCRIPTION, DELETE_TOOTH_DESCRIPTION, SET_PATIENT_TOOTH_DESCRIPTION } from "../types/patientTeethDescriptionTypes";
 import { requestFailed, requestStarted, requestSucceeded } from "./feddbackActionCreators";
 
 
@@ -13,6 +13,11 @@ export const setPatientToothDescription = (descriptionArray) => ({
 export const addToothDesription = (description) => ({
     type: ADD_TOOTH_DESCRIPTION,
     payload: description
+})
+
+export const deleteToothDescription = (descriptionId) => ({
+    type: DELETE_TOOTH_DESCRIPTION,
+    payload: descriptionId
 })
 
 export const fetchToothDescriptions = (patientId, toothId) => {
@@ -54,3 +59,22 @@ export const requestCreatingNewDescription = (data, patientId, toothId) => {
         }
     }
 }
+
+export const requestDeletingToothDescription = (obj, closeModal) => {
+    return async (dispatch, getState) => {
+        const state = getState();
+        const token = state.user.token;
+        try {
+            dispatch(requestStarted())
+            const res = await axios.delete(`${process.env.REACT_APP_API_URL}/patient-tooth/${obj.patientId}/${obj.toothId}/${obj.descriptionId}`, { headers: {authorization: token} })
+            dispatch(requestSucceeded())
+            if (res.data && res.data.message){
+                alertSuccess(res.data.message)
+            }
+            dispatch(deleteToothDescription(obj.descriptionId))
+            closeModal()
+        } catch (error) {
+            dispatch(requestFailed(error))
+        }
+    }
+} 
