@@ -1,7 +1,7 @@
 import axios from "axios";
 import { alertSuccess } from "../../utils/feedback";
 
-import { ADD_PATIENT, SET_ALL_PATIENTS } from "../types/patientActionTypes";
+import { ADD_PATIENT, SELECT_PATIENT, SET_ALL_PATIENTS } from "../types/patientActionTypes";
 import { requestFailed, requestStarted, requestSucceeded } from "./feddbackActionCreators";
 
 export const setAllPatients = (patientsArray) => ({
@@ -11,6 +11,11 @@ export const setAllPatients = (patientsArray) => ({
 
 export const addPatient = (patient) => ({
     type: ADD_PATIENT,
+    payload: patient
+})
+
+export const selectPatient = (patient) => ({
+    type: SELECT_PATIENT,
     payload: patient
 })
 
@@ -41,12 +46,28 @@ export const requestCreatingPatient = (data, history) => {
             if (res.data && res.data.message) {
                 alertSuccess(res.data.message)
             }
-            if(res.data && res.data.patient && res.data.patient._id){
-                dispatch(addPatient({...data, _id: res.data.patient._id}))
+            if (res.data && res.data.patient && res.data.patient._id) {
+                dispatch(addPatient({ ...data, _id: res.data.patient._id }))
                 history.push('/patients')
             }
         } catch (error) {
 
+        }
+    }
+}
+
+export const fetchPatientById = (id) => {
+    return async (dispatch, getState) => {
+        const state = getState();
+        const token = state.user.token
+        try {
+            dispatch(requestStarted())
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/patients/${id}`, { headers: { authorization: token } })
+            dispatch(requestSucceeded())
+            const patient = res.data
+            dispatch(selectPatient(patient))
+        } catch (error) {
+            dispatch(requestFailed(error))
         }
     }
 }
