@@ -5,10 +5,12 @@ import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchToothDescriptions } from '../../redux/actions/patientTeethDescriptionActionCreators';
+import { fetchToothDescriptions, requestCreatingNewDescription } from '../../redux/actions/patientTeethDescriptionActionCreators';
 
 
 import './patientTeethChart.css'
+import { Form } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 const spots = [
 	{
@@ -570,9 +572,13 @@ const outlines = [
 function PatientTeethChart() {
 	const [show, setShow] = useState(false);
 	const [toothId, setToothId] = useState('');
+	const [newDescription, setNewDescription] = useState({
+		description: ""
+	})
 
 	const toothDescription = useSelector(state => state.toothDescription.all)
 	const dispatch = useDispatch()
+	const history = useHistory()
 
 	const { id } = useParams()
 	const patientId = id
@@ -588,6 +594,16 @@ function PatientTeethChart() {
 			dispatch(fetchToothDescriptions(patientId, toothId))
 		}
 	}, [toothId])
+
+	const handleSubmit = (e) => {
+		e.preventDefault()
+		dispatch(requestCreatingNewDescription(newDescription, patientId, toothId))
+		history.push(`/patients/${patientId}`)
+	}
+
+	const handleChange = (e) => {
+		setNewDescription(prevData => ({ ...prevData, [e.target.name]: e.target.value }))
+	}
 
 	return (
 		<>
@@ -647,36 +663,44 @@ function PatientTeethChart() {
 				backdrop="static"
 				keyboard={false}
 				centered
+				size='xl'
 			>
-				<Modal.Header closeButton>
-					<Modal.Title>Modal title</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					<Table striped bordered hover>
-						<thead>
-							<tr>
-								<th>Tooth Number</th>
-								<th> {toothId} </th>
-							</tr>
-						</thead>
-						<tbody>
-							{
-								toothDescription.map(desc => (
-									<tr>
-										<td>Description</td>
-										<td> {desc.description} </td>
-									</tr>
-								))
-							}
-						</tbody>
-					</Table>
-				</Modal.Body>
-				<Modal.Footer>
-					<Button variant="secondary" onClick={handleClose}>
-						Close
-					</Button>
-					<Button variant="primary">Understood</Button>
-				</Modal.Footer>
+				<Form onSubmit={handleSubmit}>
+
+					<Modal.Header closeButton>
+						<Modal.Title>Modal title</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						<Table striped bordered hover responsive>
+							<thead>
+								<tr>
+									<th>Tooth Number</th>
+									<th> {toothId} </th>
+								</tr>
+							</thead>
+							<tbody>
+								{
+									toothDescription.map(desc => (
+										<tr>
+											<td>Description</td>
+											<td> {desc.description} </td>
+										</tr>
+									))
+								}
+							</tbody>
+						</Table>
+						<Form.Group>
+							<Form.Label>New Description</Form.Label>
+							<Form.Control as="textarea" name="description" rows={3} value={newDescription.description} onChange={handleChange} />
+						</Form.Group>
+					</Modal.Body>
+					<Modal.Footer>
+						<Button variant="secondary" onClick={handleClose}>
+							Close
+						</Button>
+						<Button type="submit" variant="primary">Save</Button>
+					</Modal.Footer>
+				</Form>
 			</Modal>
 		</>
 	)
