@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Sidebar from '../components/side bar/Sidebar';
+import Sidebar2 from '../components/side bar/Sidebar2';
 
 function InsideLayout(props) {
     return (
@@ -8,8 +9,9 @@ function InsideLayout(props) {
             {/* <div style={{ background: 'lightgreen', padding: 15, height: '100vh' }}>
                 <p>InsideLayout</p>
             </div> */}
-            <Sidebar />
-            <div>
+            <Sidebar2 />
+            {/* <Sidebar /> */}
+            <div className='child'>
                 {props.children}
             </div>
         </div>
