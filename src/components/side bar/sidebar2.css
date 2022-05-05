@@ -1,7 +1,7 @@
 
 .body {
     height: 100vh;
-    transition: var(--tran-04);
+    transition: var(--tran-05);
     font-family: var(--font-family);
 }
 
@@ -44,9 +44,13 @@
     font-size: 16px;
     font-weight: 500;
     color: var(--text-color);
-    transition: var(--tran-04);
+    transition: var(--tran-05);
     white-space: nowrap;
     opacity: 1;
+}
+
+.sidebar.close .text {
+    display: none;
 }
 
 .sidebar .image {
@@ -80,12 +84,14 @@
     min-width: 60px;
     font-size: 20px;
     height: 100%;
+    font-size: 20px;
+    cursor: pointer;
 }
 
 .sidebar  .icon,
 .sidebar  .text {
     color: var(--text-color);
-    transition: var(--tran-02);
+    transition: var(--tran-03);
 }
 
 .sidebar .text{
@@ -135,7 +141,7 @@ header .image-text .header-text {
     justify-content: center;
     border-radius: 50%;
     font-size: 20px;
-    transition: var(--tran-03);
+    transition: var(--tran-05);
 }
 
 .sidebar.close  .toggle {
@@ -147,19 +153,7 @@ header .image-text .header-text {
     color: var(--text-color);
 }
 
-.sidebar .search-box {
-    background: var(--primary-color-light);
-    border-radius: 6px;
-}
 
-.search-box input {
-    height: 100%;
-    width: 100%;
-    outline: none;
-    border: none;
-    border-radius: 6px;
-    background: var(--primary-color-light);
-}
 
 .sidebar li a {
     list-style: none;
@@ -170,7 +164,8 @@ header .image-text .header-text {
     align-items: center;
     text-decoration: none;
     border-radius: 6px;
-    transition: var(--tran-04);
+    transition: var(--tran-03);
+    cursor: pointer;
 }
 
 .sidebar li a:hover {
@@ -193,7 +188,7 @@ header .image-text .header-text {
     display: none;
 }
 
-.menu-bar .mode {
+.sidebar .menu-bar .mode {
     position: relative;
     border-radius: 6px;
     background: var(--primary-color-light);
@@ -243,6 +238,7 @@ header .image-text .header-text {
     width: 44px;
     border-radius: 25px;
     background: var(--toggle-color);
+    transition: var(--tran-05);
 }
 
 .switch::before {
@@ -255,7 +251,7 @@ header .image-text .header-text {
     left: 5px;
     transform: translateY(-50%);
     background: var(--sidebar-color);
-    transition: var(--tran-03);
+    transition: var(--tran-04);
 }
 
 .body.dark .switch::before {
@@ -268,7 +264,7 @@ header .image-text .header-text {
     height: 100vh;
     left: 250px;
     width: calc(100% - 250px);
-    transition: var(--tran-05);
+    transition: var(--tran-01);
 }
 
 .sidebar.close ~ .child {
