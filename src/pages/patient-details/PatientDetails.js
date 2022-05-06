@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Container, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import DeletePatientModal from '../../components/delete-patient-modal/DeletePatientModal'
 import PatientTeethChart from '../../components/patient teeth chart/PatientTeethChart'
@@ -77,8 +78,10 @@ function PatientDetails() {
                     </table>
                   </div>
                   <div>
-                    <button className="button edit-button">Edit</button>
-                    <DeletePatientModal patientId = {id} />
+                    <NavLink to={`/update-patient/${id}`}>
+                      <button className="button edit-button">Edit</button>
+                    </NavLink>
+                    <DeletePatientModal patientId={id} />
                   </div>
                 </div>
                 <div className="patient__details-chart">

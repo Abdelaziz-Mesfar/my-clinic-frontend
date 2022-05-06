@@ -1,7 +1,7 @@
 import axios from "axios";
 import { alertSuccess } from "../../utils/feedback";
 
-import { ADD_PATIENT, REMOVE_PATIENT, SELECT_PATIENT, SET_ALL_PATIENTS } from "../types/patientActionTypes";
+import { ADD_PATIENT, REMOVE_PATIENT, SELECT_PATIENT, SET_ALL_PATIENTS, UPDATE_PATIENT } from "../types/patientActionTypes";
 import { requestFailed, requestStarted, requestSucceeded } from "./feddbackActionCreators";
 
 export const setAllPatients = (patientsArray) => ({
@@ -22,6 +22,11 @@ export const selectPatient = (patient) => ({
 export const removePatient = (patientId) => ({
     type: REMOVE_PATIENT,
     payload: patientId
+})
+
+export const updatePatient = (patientId, data) => ({
+    type: UPDATE_PATIENT,
+    payload: { id: patientId, data }
 })
 
 export const fetchAllPatients = () => {
@@ -92,6 +97,25 @@ export const requestDeletingPatient = (patientId, closeModal) => {
             closeModal()
         } catch (error) {
             dispatch(requestFailed(error))
-        } 
+        }
+    }
+}
+
+export const requestUpdatingPatient = (patientId, data, history) => {
+    return async (dispatch, getState) => {
+        const state = getState();
+        const token = state.user.token;
+        try {
+            dispatch(requestStarted())
+            const res = await axios.put(`${process.env.REACT_APP_API_URL}/patients/${patientId}`, data, { headers: { authorization: token } })
+            dispatch(requestSucceeded())
+            if (res.data && res.data.message) {
+                alertSuccess(res.data.message)
+                history.push(`/patients/${patientId}`)
+            }
+            dispatch(updatePatient(patientId, data))
+        } catch (error) {
+            dispatch(requestFailed(error))
+        }
     }
 }

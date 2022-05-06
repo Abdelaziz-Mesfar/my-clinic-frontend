@@ -10,6 +10,7 @@ import PatientDetails from './pages/patient-details/PatientDetails';
 import Patients from './pages/Patients';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
+import UpdatePatient from './pages/update-patient/UpdatePatient';
 import { login } from './redux/actions/userActionCreators';
 import PrivateRoute from './routes/PrivateRoute';
 import PublicRoute from './routes/PublicRoute';
@@ -33,6 +34,7 @@ function App() {
           <PrivateRoute exact path='/patients' component={Patients} />
           <PrivateRoute exact path='/new-patient' component={CreateNewPatient} />
           <PrivateRoute exact path='/patients/:id' component={PatientDetails} />
+          <PrivateRoute exact path='/update-patient/:id' component={UpdatePatient} />
           <PrivateRoute exact path='/profile' component={Profile} />
         </Switch>
       </Router>
