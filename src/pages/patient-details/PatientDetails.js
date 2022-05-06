@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Container, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import DeletePatientModal from '../../components/delete-patient-modal/DeletePatientModal'
 import PatientTeethChart from '../../components/patient teeth chart/PatientTeethChart'
 import PatientTeethChart2 from '../../components/patient teeth chart/PatientTeethChart2'
 import { fetchPatientById } from '../../redux/actions/patientsActionCreator'
@@ -77,7 +78,7 @@ function PatientDetails() {
                   </div>
                   <div>
                     <button className="button edit-button">Edit</button>
-                    <button className="button delete-button">Delete</button>
+                    <DeletePatientModal patientId = {id} />
                   </div>
                 </div>
                 <div className="patient__details-chart">

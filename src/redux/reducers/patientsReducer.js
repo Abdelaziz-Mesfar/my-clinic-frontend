@@ -1,4 +1,4 @@
-import { ADD_PATIENT, SELECT_PATIENT, SET_ALL_PATIENTS } from "../types/patientActionTypes";
+import { ADD_PATIENT, REMOVE_PATIENT, SELECT_PATIENT, SET_ALL_PATIENTS } from "../types/patientActionTypes";
 
 const initialState = {
   all: [],
@@ -21,6 +21,11 @@ function patientsReducer(state = initialState, action) {
       return {
         ...state,
         all: [...state.all, action.payload]
+      }
+    case REMOVE_PATIENT:
+      return {
+        ...state,
+        all: state.all.filter(patient => patient._id !== action.payload)
       }  
     default:
       return state;

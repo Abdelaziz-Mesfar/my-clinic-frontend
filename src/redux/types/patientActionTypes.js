@@ -1,3 +1,4 @@
 export const SET_ALL_PATIENTS="SET_ALL_PATIENTS";
 export const ADD_PATIENT = "ADD_PATIENT";
 export const SELECT_PATIENT = "SELECT_PATIENT";
+export const REMOVE_PATIENT = "REMOVE_PATIENT";
