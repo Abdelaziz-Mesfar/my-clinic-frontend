@@ -6,7 +6,7 @@ import CreateNewPatient from './pages/CreateNewPatient';
 import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import PatientDetails from './pages/PatientDetails';
+import PatientDetails from './pages/patient-details/PatientDetails';
 import Patients from './pages/Patients';
 import Profile from './pages/Profile';
 import Register from './pages/Register';

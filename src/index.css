@@ -34,57 +34,6 @@
 
 
 
-.patient__details {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+#root {
+    background: #F7F3EB;
 }
-
-.patient__details-info {
-  background-color: lightgray;
-  border-radius: 2rem;
-  width: 500px;
-  height: auto;
-  padding: 2rem;
-  margin:  1rem 5rem;
-  font-size: 18px;
-  box-shadow: 
-  2.8px 2.8px 2.2px rgba(0, 0, 0, 0.049),
-  6.8px 6.7px 5.3px rgba(0, 0, 0, 0.069),
-  12.8px 12.5px 10px rgba(0, 0, 0, 0.085),
-  22.8px 22.3px 17.9px rgba(0, 0, 0, 0.103),
-  42.6px 41.8px 33.4px rgba(0, 0, 0, 0.125),
-  102px 100px 80px rgba(0, 0, 0, 0.16);
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.patient__details-info p:first-child {
-    font-weight: bold;
-}
-
-/* .patient__details-info td:first-child {
-    font-weight: bold;
-} */
-
-.patient__details-chart {
-    margin: 1rem 3rem;
-    padding: 0 2rem;
-}
-
-.patient__details-info__name, .patient__details-info__age, .patient__details-info__phone, .patient__details-info__adress {
-    display: flex;
-    justify-content: center;
-
-    padding: 0 1rem;
-    margin: 0.5rem 1rem;
-}
-
-.patient__details-info__name p, .patient__details-info__age p, .patient__details-info__phone p, .patient__details-info__adress p{
-    padding: 0 0.5rem;
-}
-
