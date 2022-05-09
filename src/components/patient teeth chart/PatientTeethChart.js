@@ -9,9 +9,11 @@ import './patientTeethChart.css';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal';
-import  Form  from 'react-bootstrap/Form';
+import Form from 'react-bootstrap/Form';
 
-import { fetchToothDescriptions, requestCreatingNewDescription } from '../../redux/actions/patientTeethDescriptionActionCreators';
+import { fetchToothDescriptions, requestCreatingNewDescription, requestUpdatingToothDescription } from '../../redux/actions/patientTeethDescriptionActionCreators';
+import ReadOnlyDescription from './ReadOnlyDescription';
+import EditDescription from './EditDescription';
 
 
 
@@ -578,6 +580,10 @@ function PatientTeethChart() {
 	const [newDescription, setNewDescription] = useState({
 		description: ""
 	})
+	const [editDescriptionId, setEditDescriptionId] = useState(null)
+	const [editDescription, setEditDescription] = useState({
+		description: ""
+	})
 
 	const toothDescription = useSelector(state => state.toothDescription.all)
 	const dispatch = useDispatch()
@@ -606,6 +612,26 @@ function PatientTeethChart() {
 
 	const handleChange = (e) => {
 		setNewDescription(prevData => ({ ...prevData, [e.target.name]: e.target.value }))
+	}
+
+	const handleEditClick = (e, description) => {
+		e.preventDefault()
+		setEditDescriptionId(description._id)
+	}
+
+	const handleEditChange = (e) => {
+		e.preventDefault()
+		setEditDescription(prevData => ({ ...prevData, [e.target.name]: e.target.value }))
+	}
+
+	const handleCancelClick = () => {
+		setEditDescriptionId(null)
+	}
+
+	const handleEditSubmit = (e) => {
+		e.preventDefault()
+		const { description } = editDescription
+		dispatch(requestUpdatingToothDescription({ patientId, toothId, editDescriptionId }, description))
 	}
 
 	return (
@@ -668,12 +694,12 @@ function PatientTeethChart() {
 				centered
 				size='xl'
 			>
-				<Form onSubmit={handleSubmit}>
 
-					<Modal.Header closeButton>
-						<Modal.Title>Modal title</Modal.Title>
-					</Modal.Header>
-					<Modal.Body>
+				<Modal.Header closeButton>
+					<Modal.Title>Modal title</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<Form onSubmit={handleEditSubmit} >
 						<Table striped bordered hover responsive>
 							<thead>
 								<tr>
@@ -684,29 +710,48 @@ function PatientTeethChart() {
 							<tbody>
 								{
 									toothDescription.map(desc => (
-										<tr>
-											<td>Description</td>
-											<td className="d-flex justify-content-between align-items-center">
-												{desc.description}
-												<DeleteToothDescriptionModal description={desc} toothId={toothId} patientId={patientId} />
-											</td>
-										</tr>
+										<>
+											{editDescriptionId === desc._id ? (
+												<EditDescription
+													desc={desc}
+													handleEditChange={handleEditChange}
+													handleCancelClick={handleCancelClick}
+												/>
+											) : (
+												<ReadOnlyDescription
+													desc={desc}
+													toothId={toothId}
+													patientId={patientId}
+													handleEditClick={handleEditClick}
+												/>
+											)}
+										</>
+
+										// <tr>
+										// 	<td>Description</td>
+										// 	<td className="d-flex justify-content-between align-items-center">
+										// 		{desc.description}
+										// 		<Form.Control as="textarea"  value={desc.description} disabled  plaintext style={{width: "80%"}} />
+										// 		<div>
+										// 			<i className="bi bi-pencil-square btn"></i>
+										// 			<DeleteToothDescriptionModal description={desc} toothId={toothId} patientId={patientId} />
+										// 		</div>
+										// 	</td>
+										// </tr>
 									))
 								}
 							</tbody>
 						</Table>
+					</Form>
+					<Form onSubmit={handleSubmit}>
 						<Form.Group>
 							<Form.Label>New Description</Form.Label>
 							<Form.Control as="textarea" name="description" rows={3} value={newDescription.description} onChange={handleChange} />
 						</Form.Group>
-					</Modal.Body>
-					<Modal.Footer>
-						<Button variant="secondary" onClick={handleClose}>
-							Close
-						</Button>
 						<Button type="submit" variant="primary">Save</Button>
-					</Modal.Footer>
-				</Form>
+						<Button variant="secondary" onClick={handleClose}>Close</Button>
+					</Form>
+				</Modal.Body>
 			</Modal>
 		</>
 	)
