@@ -4,6 +4,7 @@ import moment from 'moment'
 import NewAppointmentModal from '../components/new-appointment-modal/NewAppointmentModal'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllPatients } from '../redux/actions/patientsActionCreator'
+import { fetchAllAppointments } from '../redux/actions/appointmentActionCreators'
 
 
 
@@ -12,15 +13,19 @@ function Dashboard() {
   const localizer = momentLocalizer(moment)
   const dispatch = useDispatch()
 
-  const events = [
-    {}
-  ]
+  const events = useSelector(state => state.appointments.all)
 
   useEffect(()=>{
     dispatch(fetchAllPatients())
   },[])
 
+  useEffect(()=>{
+    dispatch(fetchAllAppointments())
+  },[])
+
   const [event, setEvent] = useState(events)
+
+  console.log(event);
 
   const handleSelectSlot = useCallback(
     ({ start, end }) => {
@@ -45,7 +50,7 @@ function Dashboard() {
         startAccessor="start"
         endAccessor="end"
         onSelectEvent={handleSelectEvent}
-        onSelectSlot={handleSelectSlot}
+        // onSelectSlot={handleSelectSlot}
         selectable
         style={{ height: "500", margin: "50px" }}
       />
