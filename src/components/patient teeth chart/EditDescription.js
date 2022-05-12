@@ -11,7 +11,7 @@ function EditDescription({ desc, handleEditChange, handleCancelClick }) {
                         type="text"
                         name="description"
                         value={desc.description}
-                        onChange={handleEditChange}
+                        onChange={(e) => handleEditChange(e, desc)}
                         style={{ width: "80%", border: "none" }}
                     />
                     <div>

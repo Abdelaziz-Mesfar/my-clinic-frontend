@@ -617,11 +617,12 @@ function PatientTeethChart() {
 	const handleEditClick = (e, description) => {
 		e.preventDefault()
 		setEditDescriptionId(description._id)
+		setEditDescription({description: description.description})
 	}
 
-	const handleEditChange = (e) => {
+	const handleEditChange = (e, desc) => {
 		e.preventDefault()
-		setEditDescription(prevData => ({ ...prevData, [e.target.name]: e.target.value }))
+		setEditDescription(prevData => ({ ...prevData, description: e.target.value || desc.description }))
 	}
 
 	const handleCancelClick = () => {
@@ -630,8 +631,7 @@ function PatientTeethChart() {
 
 	const handleEditSubmit = (e) => {
 		e.preventDefault()
-		const { description } = editDescription
-		dispatch(requestUpdatingToothDescription({ patientId, toothId, editDescriptionId }, description))
+		dispatch(requestUpdatingToothDescription({ patientId, toothId, editDescriptionId }, editDescription))
 	}
 
 	return (
@@ -713,7 +713,7 @@ function PatientTeethChart() {
 										<>
 											{editDescriptionId === desc._id ? (
 												<EditDescription
-													desc={desc}
+													desc={editDescription}
 													handleEditChange={handleEditChange}
 													handleCancelClick={handleCancelClick}
 												/>
