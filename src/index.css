@@ -34,6 +34,7 @@
 
 
 
-#root {
+#root, html {
     background: #F7F3EB;
+    height: 100vh;
 }
