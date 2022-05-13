@@ -12,14 +12,16 @@ import TextField from '@mui/material/TextField'
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import Autocomplete from '@mui/material/Autocomplete'
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { requestCreatingAppointment } from '../../redux/actions/appointmentActionCreators';
 
 
-function NewAppointmentModal({ setEvent, event }) {
+function NewAppointmentModal() {
 
     const [show, setShow] = useState(false);
     const [interval, setInternal] = useState('');
     const [name, setName] = useState(null)
     const [date, setDate] = useState(null)
+    const[patientId, setPatientId] = useState('')
     const [newEvent, setNewEvent] = useState({
         title: "",
         start: null,
@@ -27,6 +29,7 @@ function NewAppointmentModal({ setEvent, event }) {
     })
 
     const disptach = useDispatch()
+    const history = useHistory()
     const patients = useSelector(state => state.patients.all)
 
     const handleClose = () => setShow(false);
@@ -35,7 +38,8 @@ function NewAppointmentModal({ setEvent, event }) {
 
 
     const handleAddEvent = () => {
-        setEvent([...event, newEvent])
+        disptach(requestCreatingAppointment(newEvent, history, patientId))
+        // setEvent([...event, newEvent])
     }
 
     return (
@@ -71,7 +75,8 @@ function NewAppointmentModal({ setEvent, event }) {
                         options={patients}
                         onChange={(_, newValue) => {
                             setName(newValue)
-                            setNewEvent({ ...newEvent, title: `${newValue.firstName}  ${newValue.lastName}`, start: moment(date), end: moment(date).add('minutes', interval), patient: newValue._id })
+                            setNewEvent({ ...newEvent, title: `${newValue.firstName}  ${newValue.lastName}`, start: moment(date), end: moment(date).add(interval, 'minutes')/*, patient: newValue._id*/ })
+                            setPatientId(newValue._id)
                         }}
                         getOptionLabel={option => `${option.firstName}  ${option.lastName}`}
                         renderInput={(params) => <TextField {...params} label="Pick a patient" />}

@@ -15,27 +15,29 @@ function Dashboard() {
 
   const events = useSelector(state => state.appointments.all)
 
-  useEffect(()=>{
-    dispatch(fetchAllPatients())
-  },[])
 
   useEffect(()=>{
+    dispatch(fetchAllPatients())
     dispatch(fetchAllAppointments())
   },[])
 
-  const [event, setEvent] = useState(events)
+  // useEffect(()=>{
+  //   dispatch(fetchAllAppointments())
+  // },[])
 
-  console.log(event);
+  // const [event, setEvent] = useState(events)
 
-  const handleSelectSlot = useCallback(
-    ({ start, end }) => {
-      const title = window.prompt('New Event name')
-      if (title) {
-        setEvent((prev) => [...prev, { start, end, title }])
-      }
-    },
-    [setEvent]
-  )
+  // console.log(event);
+
+  // const handleSelectSlot = useCallback(
+  //   ({ start, end }) => {
+  //     const title = window.prompt('New Event name')
+  //     if (title) {
+  //       setEvent((prev) => [...prev, { start, end, title }])
+  //     }
+  //   },
+  //   [setEvent]
+  // )
 
   const handleSelectEvent = useCallback(
     (event) => window.alert(event.title),
@@ -46,7 +48,7 @@ function Dashboard() {
     <>
       <Calendar
         localizer={localizer}
-        events={event}
+        events={events}
         startAccessor="start"
         endAccessor="end"
         onSelectEvent={handleSelectEvent}
@@ -54,7 +56,7 @@ function Dashboard() {
         selectable
         style={{ height: "500", margin: "50px" }}
       />
-      <NewAppointmentModal setEvent={setEvent} event={event} />
+      <NewAppointmentModal  />
     </>
   )
 }
