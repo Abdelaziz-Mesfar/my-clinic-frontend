@@ -2,29 +2,35 @@ import React from 'react'
 import { Button, Card } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 
+import logo from '../../assets/card-logo.png'
 import './patientCard.css'
 
-function PatientCard({ patient }) {
+function PatientCard({ patient, patients }) {
     return (
-        <div className='card'>
+        <div className='cards'>
             <div className="patient__card">
-                <div className="patient__card-image">
-                    <img src='https://c8.alamy.com/comp/2AENRME/face-expression-of-handsome-man-laughing-male-emotion-young-guy-cartoon-character-vector-illustration-isolated-on-white-background-2AENRME.jpg' alt="patient image" />
+                <div className="patient__card-header">
+                    <div className="patient__card-header__number">
+                        <p>Patient Number</p>
+                        <p> {`${patients.indexOf(patient) + 1}`} </p>
+                    </div>
+                    <img src={logo} alt="logo" />
                 </div>
-                <div className="patient__card-info">
+                <div className="patient__card-name">
+                    <p> {`${patient.firstName} ${patient.lastName}`} </p>
+                </div>
+                <div className="patient__card-phone">
                     <div>
-                        <h4>Name :</h4>
-                        <h5> {patient.firstName} {patient.lastName} </h5>
+                        <p>Phone :</p>
+                        <p> {patient.phone} </p>
                     </div>
                     <div>
-                        <p >phone :</p>
-                        <p > {patient.phone} </p>
+                        <NavLink to={`/patients/${patient._id}`}>
+                            <span>
+                                <i className="bi bi-journal-medical"></i>
+                            </span>
+                        </NavLink>
                     </div>
-                </div>
-                <div>
-                    <NavLink to={`/patients/${patient._id}`}>
-                        <button>Details</button>
-                    </NavLink>
                 </div>
             </div>
         </div>
