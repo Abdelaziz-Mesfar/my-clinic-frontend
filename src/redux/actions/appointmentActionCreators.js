@@ -1,6 +1,6 @@
 import axios from "axios";
 import { alertSuccess } from "../../utils/feedback";
-import { ADD_APPOINTMENT, SET_ALL_APPOINTMENTS } from "../types/appointmentActionTypes";
+import { ADD_APPOINTMENT, SELECT_APPOINTMENT, SET_ALL_APPOINTMENTS } from "../types/appointmentActionTypes";
 import { requestFailed, requestStarted, requestSucceeded } from "./feddbackActionCreators";
 
 
@@ -11,6 +11,11 @@ export const setAllAppointments = (appointmentsArray) => ({
 
 export const addAppointment = (appointment) => ({
     type: ADD_APPOINTMENT,
+    payload: appointment
+})
+
+export const selectAppointment = (appointment) => ({
+    type: SELECT_APPOINTMENT,
     payload: appointment
 })
 
@@ -31,7 +36,7 @@ export const fetchAllAppointments = () => {
 }
 
 export const requestCreatingAppointment = (data, history, patientId) => {
-    return async(dispatch, getState) => {
+    return async (dispatch, getState) => {
         const state = getState()
         const token = state.user.token
         try {
@@ -40,10 +45,26 @@ export const requestCreatingAppointment = (data, history, patientId) => {
             if (res.data && res.data.message) {
                 alertSuccess(res.data.message)
             }
-            if(res.data && res.data.appointment && res.data.appointment._id){
-                dispatch(addAppointment({...data, _id: res.data.appointment._id}))
+            if (res.data && res.data.appointment && res.data.appointment._id) {
+                dispatch(addAppointment({ ...data, _id: res.data.appointment._id }))
                 history.push('/dashboard')
             }
+        } catch (error) {
+            dispatch(requestFailed(error))
+        }
+    }
+}
+
+export const fetchAppointmentById = (id) => {
+    return async (dispatch, getState) => {
+        const state = getState();
+        const token = state.user.token;
+        try {
+            dispatch(requestStarted())
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/appointments/${id}`, { headers: { authorization: token } })
+            dispatch(requestSucceeded())
+            const appointment = res.data
+            dispatch(selectAppointment(appointment))
         } catch (error) {
             dispatch(requestFailed(error))
         }

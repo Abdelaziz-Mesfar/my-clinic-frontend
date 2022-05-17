@@ -1,4 +1,4 @@
-import { ADD_APPOINTMENT, SET_ALL_APPOINTMENTS } from "../types/appointmentActionTypes";
+import { ADD_APPOINTMENT, SELECT_APPOINTMENT, SET_ALL_APPOINTMENTS } from "../types/appointmentActionTypes";
 
 
 const initialState = {
@@ -17,6 +17,11 @@ function appointmentReducer(state = initialState, action) {
             return {
                 ...state,
                 all: [...state.all, action.payload]
+            }
+        case SELECT_APPOINTMENT: 
+            return {
+                ...state,
+                selected: action.payload
             }
     
         default:
