@@ -1,6 +1,6 @@
 import axios from "axios";
 import { alertSuccess } from "../../utils/feedback";
-import { ADD_APPOINTMENT, SELECT_APPOINTMENT, SET_ALL_APPOINTMENTS } from "../types/appointmentActionTypes";
+import { ADD_APPOINTMENT, SELECT_APPOINTMENT, SET_ALL_APPOINTMENTS,RESET_SELECTED_APPOINTMENT } from "../types/appointmentActionTypes";
 import { requestFailed, requestStarted, requestSucceeded } from "./feddbackActionCreators";
 
 
@@ -17,6 +17,10 @@ export const addAppointment = (appointment) => ({
 export const selectAppointment = (appointment) => ({
     type: SELECT_APPOINTMENT,
     payload: appointment
+})
+
+export const resetSelectedApppointment = () => ({
+    type: RESET_SELECTED_APPOINTMENT
 })
 
 export const fetchAllAppointments = () => {

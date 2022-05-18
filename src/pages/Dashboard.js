@@ -4,7 +4,8 @@ import moment from 'moment'
 import NewAppointmentModal from '../components/new-appointment-modal/NewAppointmentModal'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllPatients } from '../redux/actions/patientsActionCreator'
-import { fetchAllAppointments } from '../redux/actions/appointmentActionCreators'
+import { fetchAllAppointments, fetchAppointmentById } from '../redux/actions/appointmentActionCreators'
+import EditDeleteAppointmentModal from '../components/appointment-modal/EditDeleteAppointmentModal'
 
 
 
@@ -20,6 +21,8 @@ function Dashboard() {
     dispatch(fetchAllPatients())
     dispatch(fetchAllAppointments())
   },[])
+
+  
 
   // useEffect(()=>{
   //   dispatch(fetchAllAppointments())
@@ -40,7 +43,7 @@ function Dashboard() {
   // )
 
   const handleSelectEvent = useCallback(
-    (event) => window.alert(event.title),
+    (event) => dispatch(fetchAppointmentById(event._id))/*window.alert(event.title)*/,
     []
   )
 
@@ -48,17 +51,33 @@ function Dashboard() {
     <>
       <Calendar
         localizer={localizer}
-        events={events}
+        events={events.map(ev => ({...ev, start: moment(ev.start), end: moment(ev.end)}))}
         startAccessor="start"
         endAccessor="end"
         onSelectEvent={handleSelectEvent}
         // onSelectSlot={handleSelectSlot}
         selectable
+        views={['month', 'agenda']}
+        popup
         style={{ height: "500", margin: "50px" }}
       />
       <NewAppointmentModal  />
+      <EditDeleteAppointmentModal /> 
     </>
   )
 }
 
 export default Dashboard
+
+// const EditDeleteModal = () => {
+//   const selectedAppointment = useSelector()
+//   return selectedAppointment ? (
+//     <Modal
+//       onClose={dispatch(resetSelectedApppointment())}
+//     >
+//       Title: {selectedAppointment.title}
+//     </Modal>
+//   ) : (
+//     null
+//   )
+// }
