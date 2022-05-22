@@ -1,4 +1,4 @@
-import { ADD_APPOINTMENT, SELECT_APPOINTMENT, SET_ALL_APPOINTMENTS,RESET_SELECTED_APPOINTMENT } from "../types/appointmentActionTypes";
+import { ADD_APPOINTMENT, SELECT_APPOINTMENT, SET_ALL_APPOINTMENTS, RESET_SELECTED_APPOINTMENT, UPDATE_APPOINTMENT, DELETE_APPOINTMENT } from "../types/appointmentActionTypes";
 
 
 const initialState = {
@@ -13,12 +13,12 @@ function appointmentReducer(state = initialState, action) {
                 ...state,
                 all: action.payload
             };
-        case ADD_APPOINTMENT: 
+        case ADD_APPOINTMENT:
             return {
                 ...state,
                 all: [...state.all, action.payload]
             }
-        case SELECT_APPOINTMENT: 
+        case SELECT_APPOINTMENT:
             return {
                 ...state,
                 selected: action.payload
@@ -28,7 +28,17 @@ function appointmentReducer(state = initialState, action) {
                 ...state,
                 selected: null
             }
-    
+        case UPDATE_APPOINTMENT:
+            return {
+                ...state,
+                all: state.all.map(appointment => appointment._id === action.payload._id ? { ...appointment, ...action.payload.data } : appointment)
+            }
+        case DELETE_APPOINTMENT:
+            return {
+                ...state,
+                all: state.all.filter(appointment => appointment._id !== action.payload)
+            }
+
         default:
             return state;
     }

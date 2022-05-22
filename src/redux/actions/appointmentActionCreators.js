@@ -1,6 +1,6 @@
 import axios from "axios";
 import { alertSuccess } from "../../utils/feedback";
-import { ADD_APPOINTMENT, SELECT_APPOINTMENT, SET_ALL_APPOINTMENTS,RESET_SELECTED_APPOINTMENT } from "../types/appointmentActionTypes";
+import { ADD_APPOINTMENT, SELECT_APPOINTMENT, SET_ALL_APPOINTMENTS, RESET_SELECTED_APPOINTMENT, UPDATE_APPOINTMENT, DELETE_APPOINTMENT } from "../types/appointmentActionTypes";
 import { requestFailed, requestStarted, requestSucceeded } from "./feddbackActionCreators";
 
 
@@ -21,6 +21,16 @@ export const selectAppointment = (appointment) => ({
 
 export const resetSelectedApppointment = () => ({
     type: RESET_SELECTED_APPOINTMENT
+})
+
+export const updateAppointment = (appointmentId, data) => ({
+    type: UPDATE_APPOINTMENT,
+    payload: {id: appointmentId, data}
+})
+
+export const removeAppointment = (id) => ({
+    type: DELETE_APPOINTMENT,
+    payload: id
 })
 
 export const fetchAllAppointments = () => {
@@ -69,6 +79,43 @@ export const fetchAppointmentById = (id) => {
             dispatch(requestSucceeded())
             const appointment = res.data
             dispatch(selectAppointment(appointment))
+        } catch (error) {
+            dispatch(requestFailed(error))
+        }
+    }
+}
+
+export const requestUpdatingAppointment = (obj, data) => {
+    return async (dispatch, getState) => {
+        const state = getState()
+        const token = state.user.token
+        try {
+            dispatch(requestStarted())
+            const res = await axios.put(`${process.env.REACT_APP_API_URL}/appointments/${obj.patientId}/${obj.appointmentId}`, {...data, _id: undefined, user: undefined, __v:undefined, patient: undefined}, { headers: { authorization: token } })
+            dispatch(requestSucceeded())
+            if(res.data && res.data.message){
+                alertSuccess(res.data.message)
+            }
+            dispatch(updateAppointment(obj.appointmentId, data))
+            dispatch(fetchAllAppointments())
+        } catch (error) {
+            dispatch(requestFailed(error))
+        }
+    }
+}
+
+export const requestDeletingAppointment = (appointmentId) => {
+    return async(dispatch, getState) => {
+        const state = getState()
+        const token = state.user.token
+        try {
+            dispatch(requestStarted())
+            const res = await axios.delete(`${process.env.REACT_APP_API_URL}/appointments/${appointmentId}`, { headers: { authorization: token } })
+            dispatch(requestSucceeded())
+            if(res.data && res.data.message){
+                alertSuccess(res.data.message)
+            }
+            dispatch(removeAppointment(appointmentId))
         } catch (error) {
             dispatch(requestFailed(error))
         }
