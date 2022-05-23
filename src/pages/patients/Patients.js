@@ -5,8 +5,11 @@ import Container from 'react-bootstrap/Container'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
-import PatientCard from '../components/patient card/PatientCard'
-import { fetchAllPatients, setAllPatients } from '../redux/actions/patientsActionCreator'
+
+import HealthCard from 'react-health-card'
+import PatientCard from '../../components/patient card/PatientCard'
+import { fetchAllPatients, setAllPatients } from '../../redux/actions/patientsActionCreator'
+import './patients.css'
 
 function Patients() {
   // const [patients, setPatient] = useState([])
@@ -25,17 +28,21 @@ function Patients() {
   }, [])
   return (
     <>
-      <NavLink to='/new-patient'>
-        <button> Add new patient </button>
-      </NavLink>
-      <Container className="patient">
+      <Container className="">
+        <NavLink to='/new-patient'>
+          <button> Add new patient </button>
+        </NavLink>
+        <div className="patients__list">
           {
             patients.map(patient => (
-              <Container key={patient._id}>
-                <PatientCard patient={patient} />
+              <Container  key={patient._id}>
+                <div>
+                  <PatientCard patient={patient} patients={patients} />
+                </div>
               </Container>
             ))
           }
+        </div>
       </Container>
     </>
   )
