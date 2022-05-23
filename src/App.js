@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import GlobalLoading from './components/global loading/GlobalLoading';
 import CreateNewPatient from './pages/CreateNewPatient';
-import Dashboard from './pages/Dashboard';
+import Dashboard from './pages/dashboard/Dashboard';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import PatientDetails from './pages/patient-details/PatientDetails';
-import Patients from './pages/Patients';
+import Patients from './pages/patients/Patients';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
 import UpdatePatient from './pages/update-patient/UpdatePatient';

@@ -1,0 +1,11 @@
+.new__appointment-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.new__appointment-duration , .new__appointment-patient {
+    width: 258.91px;
+    margin-top: 1rem;
+}

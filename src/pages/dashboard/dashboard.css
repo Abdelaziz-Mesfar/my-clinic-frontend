@@ -1,0 +1,39 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+
+    font-family: var(--font-family);
+    margin: 3rem 4rem;
+}
+
+.dashboard__new-appointment {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 50px;
+}
+
+.dashboard__new-appointment div:first-child p {
+    font-size: 20px;
+}
+
+.dashboard__new-appointment button {
+    border: 1px solid var(--primary-color);
+    padding: 10px 32px;
+    border-radius: 35px;
+    color: var(--text-color);
+}
+
+.dashboard__new-appointment button:hover {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.dashboard__new-appointment button i {
+    padding-right: 7px;
+}
+
+/* .dashboard__calendar {
+    height: 500px;
+    margin: 50px;
+} */

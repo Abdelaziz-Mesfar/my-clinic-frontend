@@ -14,6 +14,7 @@ import Autocomplete from '@mui/material/Autocomplete'
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { requestCreatingAppointment } from '../../redux/actions/appointmentActionCreators';
 
+import './newAppointmentModal.css'
 
 function NewAppointmentModal() {
 
@@ -21,7 +22,7 @@ function NewAppointmentModal() {
     const [interval, setInternal] = useState('');
     const [name, setName] = useState(null)
     const [date, setDate] = useState(null)
-    const[patientId, setPatientId] = useState('')
+    const [patientId, setPatientId] = useState('')
     const [newEvent, setNewEvent] = useState({
         title: "",
         start: null,
@@ -45,12 +46,15 @@ function NewAppointmentModal() {
     return (
         <>
 
-            <button onClick={handleShow}>New Appointment</button>
-            <Modal show={show} onHide={handleClose} centered size='xl'>
+            <button onClick={handleShow}>
+                <i className="bi bi-plus-circle"></i>
+                Add Appointment
+            </button>
+            <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>New Appointment</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className="new__appointment-body">
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DateTimePicker
                             renderInput={(props) => <TextField {...props} />}
@@ -67,6 +71,7 @@ function NewAppointmentModal() {
                         variant="outlined"
                         value={interval}
                         onChange={(e) => setInternal(e.target.value)}
+                        className="new__appointment-duration"
                     />
                     <Autocomplete
                         id="free-solo-demo"
@@ -80,14 +85,15 @@ function NewAppointmentModal() {
                         }}
                         getOptionLabel={option => `${option.firstName}  ${option.lastName}`}
                         renderInput={(params) => <TextField {...params} label="Pick a patient" />}
+                        className="new__appointment-patient"
                     />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleAddEvent} >
-                        yes
+                    <Button className="save-button" onClick={handleAddEvent} >
+                        Add Appointment
                     </Button>
                 </Modal.Footer>
             </Modal>
