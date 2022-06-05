@@ -9,6 +9,7 @@ import { NavLink } from 'react-router-dom'
 import HealthCard from 'react-health-card'
 import PatientCard from '../../components/patient card/PatientCard'
 import { fetchAllPatients, setAllPatients } from '../../redux/actions/patientsActionCreator'
+import TextField from '@mui/material/TextField';
 import './patients.css'
 
 function Patients() {
@@ -26,24 +27,41 @@ function Patients() {
     //   })
     dispatch(fetchAllPatients())
   }, [])
+  console.log(patients);
+  const [name, setName] = useState('')
   return (
     <>
-      <Container className="">
-        <NavLink to='/new-patient'>
-          <button> Add new patient </button>
-        </NavLink>
+      <div className='patients'>
+        <div className="page__name">
+          <p>PATIENTS</p>
+        </div>
+        <div className="patients__controllers">
+          <div className='add__patient'>
+            <NavLink to='/new-patient'>
+              <button>
+                <i class="bi bi-person-plus"></i>
+                Add New Patient
+              </button>
+            </NavLink>
+          </div>
+          <div className='search__patient'>
+            {/* <input id="search-input" placeholder="search by name" value={name} onChange={e => setName(e.target.value)} /> */}
+            <TextField
+              id="outlined-basic"
+              label="Search patient"
+              variant="outlined"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              className="search__input"
+            />
+          </div>
+        </div>
         <div className="patients__list">
           {
-            patients.map(patient => (
-              <Container  key={patient._id}>
-                <div>
-                  <PatientCard patient={patient} patients={patients} />
-                </div>
-              </Container>
-            ))
+            patients.filter(p => p.firstName.includes(name) || p.lastName.includes(name)).map(patient => <PatientCard key={patient._id} patient={patient} patients={patients} />)
           }
         </div>
-      </Container>
+      </div>
     </>
   )
 }

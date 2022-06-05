@@ -5,6 +5,7 @@
     position: relative;
     -webkit-perspective: 1000px;
     perspective: 1000px;
+    display: inline-block;
     width: 350px;
     height: 220px;
 }
@@ -73,3 +74,31 @@
     color: white;
 }
 
+
+@media screen and (max-width: 515px) {
+    .cards {
+        width: 300px;
+        height: 180px;
+    }
+    .patient__card img {
+        width: 40px;
+        height: 48.78px;
+        margin: .75rem;
+    }
+
+    .patient__card-header__number {
+        margin: .9rem .5rem;
+    }
+
+    .patient__card-name {
+        font-size: 18px;
+    }
+
+    .patient__card-name p {
+        margin-bottom: .5rem;
+    }
+
+    .patient__card-phone {
+        margin: 1rem ;
+    }
+}

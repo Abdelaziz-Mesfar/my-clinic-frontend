@@ -1,5 +1,91 @@
+.patients {
+    padding: 1rem;
+    margin: .5rem 5rem;
+}
+
+.page__name {
+    text-align: center;
+    font-family: var(--font-family);
+    font-size: 50px;
+    margin: 2rem;
+}
+
+.patients__controllers {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 2rem 0;
+}
+
+.add__patient button {
+    border: 1px solid var(--primary-color);
+    padding: 10px 39.5px;
+    border-radius: 35px;
+    color: var(--text-color);
+}
+
+.add__patient button:hover {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.add__patient button i {
+    padding-right: 7px;
+}
+
+.search__patient  {
+
+    margin: 0 1rem;
+}
+
 .patients__list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-gap: 15px;
+}
+
+.search__input input {
+    padding: 11.5px 14px;
+}
+
+.search__input label {
+    top: -4.5px;
+}
+
+@media screen and (max-width: 768px ) {
+    .patients__controllers {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .patients__controllers button {
+        margin-bottom: 1rem;
+    }
+
+    .page__name {
+        font-size: 45px;
+    }
+
+    .patients__list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 515px) {
+    .page__name  {
+        font-size: 35px;
+    }
+
+    .patients__controllers button {
+        padding: 8px 30.5px;
+        font-size: 13px;
+    }
+
+    .search__input input {
+        padding: 9.5px 12px;
+    }
 }
