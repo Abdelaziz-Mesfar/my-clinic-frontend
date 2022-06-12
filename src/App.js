@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import GlobalLoading from './components/global loading/GlobalLoading';
-import CreateNewPatient from './pages/CreateNewPatient';
+import CreateNewPatient from './pages/create-new-patient/CreateNewPatient';
 import Dashboard from './pages/dashboard/Dashboard';
 import Home from './pages/Home';
 import Login from './pages/Login';
