@@ -45,6 +45,9 @@ function EditDeleteAppointmentModal() {
     const [interval, setInterval] = useState('')
     const [patientId, setPatientId] = useState('')
 
+    useEffect(() => {
+        setAppointmentData(prevData => ({ ...prevData, start: moment(date), end: moment(date).add(interval, 'minutes') }))
+    }, [interval])
 
     useEffect(() => {
         if (selectedAppointment) {
@@ -100,7 +103,7 @@ function EditDeleteAppointmentModal() {
                             value={interval}
                             onChange={e => {
                                 setInterval(e.target.value)
-                                setAppointmentData(prevData => ({ ...prevData, start: moment(date), end: moment(date).add(interval, 'minutes') }))
+                                // setAppointmentData(prevData => ({ ...prevData, start: moment(date), end: moment(date).add(interval, 'minutes') }))
                                 setPatientId(selectedAppointment.patient)
                             }}
                             className="appointment-duration"
