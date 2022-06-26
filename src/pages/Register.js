@@ -1,8 +1,18 @@
 import React, { useState } from 'react'
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+
+import TextField from '@mui/material/TextField'
+import FormControl from '@mui/material/FormControl'
+import IconButton from '@mui/material/IconButton'
+import InputAdornment from '@mui/material/InputAdornment'
+import InputLabel from '@mui/material/InputLabel' 
+import OutlinedInput from '@mui/material/OutlinedInput'
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+
 import { requestRegister } from '../redux/actions/userActionCreators'
 import { alertError } from '../utils/feedback'
 
@@ -13,40 +23,58 @@ function Register() {
     firstName: "",
     lastName: "",
     email: "",
+    phone: "",
+    adress:"",
     password: "",
     confirmPassword: ""
   })
 
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const { firstName, lastName, email, password, confirmPassword } = registerData
-    if(!firstName){
+    if (!firstName) {
       return alertError('the first name is required')
     }
-    if(!lastName) {
+    if (!lastName) {
       return alertError("the last name is required")
     }
-    if(!email){
+    if (!email) {
       return alertError("the email is required")
     }
-    if(!password){
+    if (!password) {
       return alertError("the password is required")
     }
-    if(!confirmPassword){
+    if (!confirmPassword) {
       return alertError("You have to confirm your password")
     }
-    if(password !== confirmPassword) {
+    if (password !== confirmPassword) {
       return alertError("The passwords mismatch")
     }
-    dispatch(requestRegister({firstName, lastName, email, password}, history))
+    dispatch(requestRegister({ firstName, lastName, email, password }, history))
   }
 
   const handleChange = (e) => {
     setRegisterData(prevData => ({ ...prevData, [e.target.name]: e.target.value }))
   }
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword)
+  }
+
+  const handleClickShowConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword)
+  }
+
+  const handleMouseDownPassword = (e) => {
+    e.preventDefault()
+  }
+
   return (
     <Form className="container mt-5" onSubmit={handleSubmit}>
-      <Form.Group>
+      {/* <Form.Group>
         <Form.Label className="mb-3">First Name</Form.Label>
         <Form.Control
           type="text"
@@ -54,9 +82,18 @@ function Register() {
           onChange={handleChange}
           name="firstName"
         />
-      </Form.Group>
+      </Form.Group> */}
+      <div>
+        <TextField
+          label="First Name"
+          variant="outlined"
+          value={registerData.firstName}
+          onChange={handleChange}
+          name="firstName"
+        />
+      </div>
 
-      <Form.Group>
+      {/* <Form.Group>
         <Form.Label className="mb-3">Last Name</Form.Label>
         <Form.Control
           type="text"
@@ -64,9 +101,19 @@ function Register() {
           onChange={handleChange}
           name="lastName"
         />
-      </Form.Group>
+      </Form.Group> */}
+      <div>
+        <TextField
+          label="Last Name"
+          variant="outlined"
+          value={registerData.lastName}
+          onChange={handleChange}
+          name="lastName"
+        />
+      </div>
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+
+      {/* <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control
           type="email"
@@ -75,9 +122,37 @@ function Register() {
           name="email"
           placeholder="Enter email"
         />
-      </Form.Group>
+      </Form.Group> */}
+      <div>
+        <TextField
+          label="Email"
+          variant="outlined"
+          value={registerData.email}
+          onChange={handleChange}
+          name="email"
+        />
+      </div>
+      <div>
+        <TextField
+          label="Phone Number"
+          variant="outlined"
+          value={registerData.phone}
+          onChange={handleChange}
+          name="phone"
+        />
+      </div>
+      <div>
+        <TextField
+          label="Adress"
+          variant="outlined"
+          value={registerData.adress}
+          onChange={handleChange}
+          name="adress"
+        />
+      </div>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
+
+      {/* <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
         <Form.Control
           type="password"
@@ -86,18 +161,68 @@ function Register() {
           name="password"
           placeholder="Password"
         />
-      </Form.Group>
+      </Form.Group> */}
+      <div>
+        <FormControl   /*sx={{ m: 1, width: '25ch' }}*/ variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password"
+            type={showPassword ? 'text' : 'password'}
+            value={registerData.password}
+            name="password"
+            onChange={handleChange}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Password"
+          />
+        </FormControl>
+      </div>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
+      {/* <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Confirm password</Form.Label>
         <Form.Control
-          type="password"
-          value={registerData.confirmPassword}
-          onChange={handleChange}
-          name="confirmPassword"
-          placeholder="please confirm your password here"
+        type="password"
+        value={registerData.confirmPassword}
+        onChange={handleChange}
+        name="confirmPassword"
+        placeholder="please confirm your password here"
         />
-      </Form.Group>
+      </Form.Group> */}
+      <div>
+        <FormControl /*sx={{ m: 1, width: '25ch' }}*/ variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password2"
+            type={showConfirmPassword ? 'text' : 'password'}
+            value={registerData.confirmPassword}
+            name="confirmPassword"
+            onChange={handleChange}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowConfirmPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Confirm Password"
+          />
+        </FormControl>
+      </div>
 
       <Button variant="primary" type="submit">
         Submit
