@@ -9,7 +9,7 @@ import Login from './pages/Login';
 import PatientDetails from './pages/patient-details/PatientDetails';
 import Patients from './pages/patients/Patients';
 import Profile from './pages/profile/Profile';
-import Register from './pages/Register';
+import Register from './pages/Register/Register';
 import UpdatePatient from './pages/update-patient/UpdatePatient';
 import { login } from './redux/actions/userActionCreators';
 import PrivateRoute from './routes/PrivateRoute';

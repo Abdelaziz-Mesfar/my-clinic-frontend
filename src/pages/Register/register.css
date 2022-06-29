@@ -1,0 +1,126 @@
+
+.register-page {
+    font-family: var(--font-family);
+    margin: 2rem;
+}
+
+.register-page__title {
+    text-align: center;
+    margin: 2rem auto;
+    font-size: 50px;
+}
+
+.register-page-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.register-page-content__image {
+    width: 500px;
+}
+
+.register-page-content__image img {
+    /* width: 450px; */
+    margin: 1rem 2rem;
+    padding: 1rem;
+}
+
+.register-page-content-form {
+    padding: 1rem 2rem;
+    max-width: 600px;
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-page-content-form__signUp {
+    display: flex;
+    justify-content: center;
+}
+
+.register-page-content-form__signUp i {
+    margin-right: 1rem;
+}
+
+.register-page-content-form__signUp p {
+    font-size: 1.5rem;
+} 
+
+.form__row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.register-page-content-form__email div {
+    width: 100%;
+}
+
+.register-page-content-form__firstName .MuiOutlinedInput-root .MuiOutlinedInput-input,
+.register-page-content-form__lastName .MuiOutlinedInput-root .MuiOutlinedInput-input,
+.register-page-content-form__phone .MuiOutlinedInput-root .MuiOutlinedInput-input,
+.register-page-content-form__adress .MuiOutlinedInput-root .MuiOutlinedInput-input {
+    padding: 16.5px 20.05px;
+}
+
+.register-input-field {
+    margin: 0.5rem 1rem;
+}
+
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:focus {
+    outline-color: var(--primary-color) !important;
+}
+
+.register-page-content__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+}
+
+.register-page-content__button button {
+    width: 100%;
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.register-page-content__button button:hover {
+    background-color: #F7F3EB;
+    border: 1px solid var(--primary-color);
+    color: var(--text-color);
+}
+
+@media screen and (max-width: 960px) {
+    .register-page-content__image {
+        display: none;
+    }
+
+    .register-page__title {
+        font-size: 45px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .form__row {
+        display: inline;
+    }
+
+    .register-page-content-form__adress div,
+    .register-page-content-form__firstName div,
+    .register-page-content-form__lastName div,
+    .register-page-content-form__phone div {
+      width: 100%;  
+    }
+
+    .register-page__title {
+        font-size: 35px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .register-page__title {
+        font-size: 30px;
+    }
+}
+
