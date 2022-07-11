@@ -1,0 +1,8 @@
+.navbar-app-name {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar-app-name:hover {
+    color: white;
+}
