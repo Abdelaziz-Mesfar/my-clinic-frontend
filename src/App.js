@@ -5,7 +5,7 @@ import GlobalLoading from './components/global loading/GlobalLoading';
 import CreateNewPatient from './pages/create-new-patient/CreateNewPatient';
 import Dashboard from './pages/dashboard/Dashboard';
 import Home from './pages/Home';
-import Login from './pages/Login';
+import Login from './pages/login/Login';
 import PatientDetails from './pages/patient-details/PatientDetails';
 import Patients from './pages/patients/Patients';
 import Profile from './pages/profile/Profile';
