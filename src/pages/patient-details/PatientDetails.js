@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import DeletePatientModal from '../../components/delete-patient-modal/DeletePatientModal'
 import PatientTeethChart from '../../components/patient teeth chart/PatientTeethChart'
-import PatientTeethChart2 from '../../components/patient teeth chart/PatientTeethChart2'
+// import PatientTeethChart2 from '../../components/patient teeth chart/PatientTeethChart2'
 import { fetchPatientById } from '../../redux/actions/patientsActionCreator'
 
 import './patientDetails.css'
